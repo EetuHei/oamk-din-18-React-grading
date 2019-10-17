@@ -15,7 +15,7 @@ const session = require("express-session");
 const db = require("./config/database/database");
 
 //router files
-const users = require("./routes/api/routes");
+const users = require("./routes/api/users");
 
 //passport config
 require("./config/passport/passport");
