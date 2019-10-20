@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 //database config
 const db = require("../../config/database/database");
@@ -63,48 +64,19 @@ router.post("/signup", (req, res) => {
   }
 });
 
-//POST /api/
-//Login route
-router.post("/login", (req, res) => {
-  let username = req.body.username.trim();
-  let password = req.body.password.trim();
-  //Finds user by inputted username
-  db.query("SELECT * FROM users WHERE username = ? ", [username], function(
-    err,
-    rows,
-    results
-  ) {
-    if (err) {
-      console.log(err);
-      throw err;
-    }
-    //if user is not found
-    if (results.length === 0) {
-      console.log("no user found");
-      res.sendStatus(400);
-    }
-    //if user is found
-    if (results.length !== 0) {
-      //access hashed password in db.
-      const userPassword = rows[0].password;
-      //compare input password to the hashed password
-      bcrypt.compare(password, userPassword).then(match => {
-        //if matches user can login
-        if (match) {
-          console.log("it's a match");
-          res.sendStatus(202);
-        }
-        //the password didin't match with hash
-        else {
-          console.log("wrong password");
-          res.sendStatus(400);
-        }
-      });
-    }
-  });
+//GET /api/
+//passport logout
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 //GET /api/
-//Get route
+//unprotected route
+router.get("/users", (req, res) => {
+  db.query("SELECT id, username FROM users").then(results => {
+    res.json(results);
+  });
+});
 
 module.exports = router;
