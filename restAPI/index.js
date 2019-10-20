@@ -7,7 +7,6 @@ const port = 4000;
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const cors = require("cors");
 const morgan = require("morgan");
 const session = require("express-session");
 
@@ -16,10 +15,10 @@ const db = require("./config/database/database");
 
 //router files
 const users = require("./routes/api/users");
+const auth = require("./routes/api/auth");
 
 //passport config
-require("./config/passport/passport");
-app.use(passport.initialize());
+require("./config/passport")(passport);
 
 //set up express application
 app.use(morgan("short")); //log every request to console
@@ -27,17 +26,21 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); //get info from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(
-//   session({
-//     secret: "potato",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-// app.use(passport.session());
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes
-app.use("/api/", users);
+app.use("/api", users);
+app.use("/api", auth);
 
 //launch
 Promise.all([
