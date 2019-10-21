@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import data from './data.json';
+import { Button } from 'react-bootstrap';
+
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -40,7 +42,9 @@ export class GoogleMap extends Component {
   }
 
   render() {
+
     return (
+      <div>
       <Map
         google={this.props.google}
         zoom={6}
@@ -52,7 +56,10 @@ export class GoogleMap extends Component {
       >
         {
         data.markers.map(marker => <Marker onClick={this.onMarkerClick}
-        name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} />)
+        name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
+        icon={{url: 'https://cdn3.iconfinder.com/data/icons/transport-2-10/128/Electric-Charging-Station-Tesla-Energy-Eco-Power-512.png',
+                    scaledSize: new window.google.maps.Size(25,25)}}
+        />)
         }
 
         <InfoWindow
@@ -64,15 +71,20 @@ export class GoogleMap extends Component {
             <h4>
             {this.state.selectedPlace.name}
             </h4>
+            <h4>
+            {this.state.selectedPlace.id}
+            </h4>
+            <Button>asd</Button>
           </div>
         </InfoWindow>
 
       </Map>
+      </div>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'Key Here'
+  apiKey: 'Your Key'
 })(GoogleMap);
 
