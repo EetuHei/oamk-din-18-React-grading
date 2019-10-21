@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/components/Map/data.json
+/src/components/Map/api.txt
