@@ -15,7 +15,8 @@ export class GoogleMap extends Component {
     activeMarker: {},
     selectedPlace: {},
     showingInfoWindow: false,
-    markers: []
+    markers: [],
+    paidmarkers: []
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -60,8 +61,15 @@ export class GoogleMap extends Component {
         {
         data.markers.map(marker => <Marker onClick={this.onMarkerClick}
         name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
-        icon={{url: 'https://cdn3.iconfinder.com/data/icons/transport-2-10/128/Electric-Charging-Station-Tesla-Energy-Eco-Power-512.png',
-                    scaledSize: new window.google.maps.Size(25,25)}}
+        icon={{url: 'https://cdn2.iconfinder.com/data/icons/bitsies/128/Lightning-128.png',
+        scaledSize: new window.google.maps.Size(40,40)}}
+        />)
+        }
+        {
+        data.paidmarkers.map(marker => <Marker onClick={this.onMarkerClick}
+        name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
+        icon={{url: 'https://cdn2.iconfinder.com/data/icons/miscellaneous-41/47/Asset_10-128.png',
+        scaledSize: new window.google.maps.Size(25,40)}}
         />)
         }
 
@@ -89,7 +97,6 @@ export class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-
   apiKey: 'Your Key'
 })(GoogleMap);
 
