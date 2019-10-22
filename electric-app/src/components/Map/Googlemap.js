@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import data from './data.json';
 import { Button } from 'react-bootstrap';
 
+
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -34,6 +35,7 @@ export class GoogleMap extends Component {
     }
   };
 
+
   componentDidMount(){
     fetch('/data')
     .then(r => r.json())
@@ -55,6 +57,7 @@ export class GoogleMap extends Component {
          lng: 25.41
         }}
       >
+
         {
         data.markers.map(marker => <Marker onClick={this.onMarkerClick}
         name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
@@ -76,6 +79,7 @@ export class GoogleMap extends Component {
           onClose={this.onClose}
         >
           <div>
+
             <h4>
             {this.state.selectedPlace.name}
             </h4>
@@ -93,6 +97,6 @@ export class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'your key'
+  apiKey: 'YOURKEY'
 })(GoogleMap);
 
