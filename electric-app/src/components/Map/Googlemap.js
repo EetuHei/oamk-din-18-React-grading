@@ -14,7 +14,8 @@ export class GoogleMap extends Component {
     activeMarker: {},
     selectedPlace: {},
     showingInfoWindow: false,
-    markers: []
+    markers: [],
+    paidmarkers: []
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -44,14 +45,35 @@ export class GoogleMap extends Component {
   render() {
     return (
       <div>
-        <Map
-          google={this.props.google}
-          zoom={6}
-          style={mapStyles}
-          initialCenter={{
-            lat: 65.02,
-            lng: 25.41
-          }}
+      <Map
+        google={this.props.google}
+        zoom={6}
+        style={mapStyles}
+        initialCenter={{
+         lat: 65.02,
+         lng: 25.41
+        }}
+      >
+
+        {
+        data.markers.map(marker => <Marker onClick={this.onMarkerClick}
+        name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
+        icon={{url: 'https://cdn2.iconfinder.com/data/icons/bitsies/128/Lightning-128.png',
+        scaledSize: new window.google.maps.Size(40,40)}}
+        />)
+        }
+        {
+        data.paidmarkers.map(marker => <Marker onClick={this.onMarkerClick}
+        name={marker.name} id={marker.id} position={{lat: marker.latitude, lng: marker.longitude}} 
+        icon={{url: 'https://cdn2.iconfinder.com/data/icons/miscellaneous-41/47/Asset_10-128.png',
+        scaledSize: new window.google.maps.Size(25,40)}}
+        />)
+        }
+
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
         >
           {data.markers.map(marker => (
             <Marker
