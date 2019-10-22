@@ -3,7 +3,6 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import data from "./data.json";
 import { Button } from "react-bootstrap";
 import api from "./api.json";
- 
 const mapStyles = {
   width: "100%",
   height: "100%"
@@ -33,7 +32,7 @@ export class GoogleMap extends Component {
       });
     }
   };
- 
+
   componentDidMount() {
     fetch("/data")
       .then(r => r.json())
@@ -80,7 +79,7 @@ export class GoogleMap extends Component {
               }}
             />
           ))}
- 
+
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
@@ -101,3 +100,4 @@ export class GoogleMap extends Component {
 export default GoogleApiWrapper({
   apiKey: api.key
 })(GoogleMap);
+
