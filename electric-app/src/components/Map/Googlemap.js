@@ -3,12 +3,11 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import data from "./data.json";
 import { Button } from "react-bootstrap";
 import api from "./api.json";
-
 const mapStyles = {
   width: "100%",
   height: "100%"
 };
-
+ 
 export class GoogleMap extends Component {
   state = {
     activeMarker: {},
@@ -17,14 +16,14 @@ export class GoogleMap extends Component {
     markers: [],
     paidmarkers: []
   };
-
+ 
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
-
+ 
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -41,7 +40,7 @@ export class GoogleMap extends Component {
         this.setState({ markers: data.markers });
       });
   }
-
+ 
   render() {
     return (
       <div>
@@ -97,7 +96,8 @@ export class GoogleMap extends Component {
     );
   }
 }
-
+ 
 export default GoogleApiWrapper({
   apiKey: api.key
 })(GoogleMap);
+
