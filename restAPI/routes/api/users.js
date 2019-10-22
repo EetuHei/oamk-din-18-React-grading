@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 //database config
@@ -41,6 +41,10 @@ router.post("/signup", (req, res) => {
         //if username is not taken, hashes password with bcrypt
         //and saves username and hashed password to database
         bcrypt.genSalt(8, (err, salt) => {
+          if (err){
+            console.log(err);
+            throw err;
+          }
           bcrypt.hash(password, salt).then(hash =>
             db
               .query("INSERT INTO users (username, password) VALUES (?,?)", [
