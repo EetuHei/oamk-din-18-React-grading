@@ -1,8 +1,17 @@
-.centerDiv{
-    margin: 0 auto;
+.centerDiv {
+  margin: 0 auto;
 }
 
-.centerText{
-    padding-left: 6%;
-    color: #9c9c9c;
+.centerText {
+  padding-left: 6%;
+  color: #9c9c9c;
+}
+
+.btn:hover {
+  background-color: #343a40 !important;
+  border-color: #343a40 !important;
+}
+
+.btn {
+  color: #9c9c9c !important;
 }
