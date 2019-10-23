@@ -1,0 +1,13 @@
+.btn:hover {
+  background-color: #343a40 !important;
+  border-color: #343a40 !important;
+}
+
+.btn {
+  color: #9c9c9c !important;
+}
+
+.modalColor {
+  background-color: #343a40;
+  color: #9c9c9c;
+}
