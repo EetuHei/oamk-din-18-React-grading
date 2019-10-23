@@ -11,6 +11,7 @@ const db = require("../../config/database/database");
 router.post("/signup", (req, res) => {
   let username = req.body.username.trim();
   let password = req.body.password.trim();
+  let passwordConfim = req.body.passwordConfim.trim();
 
   //username has to be 3 or longer
   //password has to be 6 or longer
@@ -18,7 +19,8 @@ router.post("/signup", (req, res) => {
     typeof username === "string" &&
     username.length >= 3 &&
     typeof password === "string" &&
-    password.length >= 6
+    password.length >= 6 &&
+    password === passwordConfim
   ) {
     //Finds user by inputted username
     db.query("SELECT * FROM users WHERE username = ?", [username], function(

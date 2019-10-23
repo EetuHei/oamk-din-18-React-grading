@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const session = require("express-session");
-
+const cors = require("cors");
 //db config
 const db = require("./config/database/database");
 
@@ -26,6 +26,7 @@ app.use(morgan("short")); //log every request to console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); //get info from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(
   session({
@@ -57,7 +58,7 @@ Promise.all([
           latitude VARCHAR(255),
           longitude VARCHAR(255),
           price VARCHAR(255)
-      )`),
+      )`)
   // Add more table create statements if you need more tables
 ])
   .then(() => {
