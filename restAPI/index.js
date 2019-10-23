@@ -16,6 +16,7 @@ const db = require("./config/database/database");
 //router files
 const users = require("./routes/api/users");
 const auth = require("./routes/api/auth");
+const data = require("./routes/api/data");
 
 //passport config
 require("./config/passport")(passport);
@@ -40,6 +41,7 @@ app.use(passport.session());
 
 //routes
 app.use("/api", users);
+app.use("/api", data);
 app.use("/api", auth);
 
 //launch
@@ -47,8 +49,15 @@ Promise.all([
   db.query(`CREATE TABLE IF NOT EXISTS users(
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(32) UNIQUE,
-            password VARCHAR(256)
-        )`)
+            password VARCHAR(255)
+        )`),
+  db.query(`CREATE TABLE IF NOT EXISTS markers(
+          id VARCHAR(32) PRIMARY KEY,
+          name VARCHAR(32),
+          latitude VARCHAR(255),
+          longitude VARCHAR(255),
+          price VARCHAR(255)
+      )`),
   // Add more table create statements if you need more tables
 ])
   .then(() => {
