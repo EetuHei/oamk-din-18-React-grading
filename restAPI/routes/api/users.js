@@ -6,9 +6,6 @@ const passport = require("passport");
 //database config
 const db = require("../../config/database/database");
 
-//load models
-// const users = require("../models/users");
-
 //POST /api/
 //Signup route
 router.post("/signup", (req, res) => {
@@ -41,7 +38,7 @@ router.post("/signup", (req, res) => {
         //if username is not taken, hashes password with bcrypt
         //and saves username and hashed password to database
         bcrypt.genSalt(8, (err, salt) => {
-          if (err){
+          if (err) {
             console.log(err);
             throw err;
           }
