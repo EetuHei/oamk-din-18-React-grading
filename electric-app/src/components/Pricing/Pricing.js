@@ -3,15 +3,14 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import GoogleMap from "..//Map/Googlemap";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import "./pricing.css";
 
 export default function Pricing() {
   return (
     <div>
       <GoogleMap />
       <Modal isOpen={true} className="modalColor">
-        <ModalHeader className="modalColor" closeButton>
-          Our Pricing
-        </ModalHeader>
+        <ModalHeader className="modalColor">Our Pricing</ModalHeader>
         <ModalBody className="modalColor">
           Slow Chargers that are free are marked by blue icons. <br></br>Slow
           Chargers that cost 0.20€/min are marked by yellow icons. <br></br>Fast
