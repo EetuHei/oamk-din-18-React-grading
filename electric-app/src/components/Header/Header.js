@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      searchField: ""
+    };
   }
 
   render() {
@@ -27,7 +29,11 @@ class Header extends React.Component {
                 <Form.Label className="centerText">
                   Search Charging Stations
                 </Form.Label>
-                <Form.Control type="text" placeholder="City..."></Form.Control>
+                <Form.Control
+                  type="text"
+                  placeholder="City..."
+                  onChange={this.props.handleInput}
+                ></Form.Control>
               </Form.Group>
             </Container>
           </div>
