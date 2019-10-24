@@ -47,7 +47,7 @@ export default class Register extends React.Component {
     console.log(userData, "this is userData");
 
     if (this.handleValidation()) {
-      const url = "http://ec2-35-170-103-69.compute-1.amazonaws.com/api/signup";
+      const url = "http://localhost:4000/api/signup";
 
       fetch(url, {
         body: JSON.stringify(userData),
