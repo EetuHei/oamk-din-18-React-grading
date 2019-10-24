@@ -15,7 +15,7 @@ export default function Pricing() {
         <ModalBody className="modalColor">
           Slow Chargers that are free are marked by blue icons. <br></br>Slow
           Chargers that cost 0.20€/min are marked by yellow icons. <br></br>Fast
-          Chargers cost 18c/kWh and are marked with icon.
+          Chargers cost 18c/kWh and are marked with green battery icon.
         </ModalBody>
         <ModalFooter className="modalColor">
           <Link to="/">

@@ -4,6 +4,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import GoogleMap from "..//Map/Googlemap";
 import { Redirect, Link } from "react-router-dom";
 import "./register.css";
+import api from "./register.json";
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -44,10 +45,10 @@ export default class Register extends React.Component {
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm
     };
-    console.log(userData, "this is userData");
+    // console.log(userData, "this is userData");
 
     if (this.handleValidation()) {
-      const url = "http://localhost:4000/api/signup";
+      const url = api.url;
 
       fetch(url, {
         body: JSON.stringify(userData),

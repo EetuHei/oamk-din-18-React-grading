@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import data from "./data.json";
 import { Button } from "react-bootstrap";
 import api from "./api.json";
+
 const mapStyles = {
   width: "100%",
   height: "100%"
@@ -35,10 +36,7 @@ export class GoogleMap extends Component {
   };
 
   componentDidMount() {
-    Promise.all([
-      fetch("http://localhost:4000/api/markers"),
-      fetch("http://localhost:4000/api/paidmarkers")
-    ])
+    Promise.all([fetch(data.url1), fetch(data.url2)])
       .then(([res1, res2]) => {
         return Promise.all([res1.json(), res2.json()]);
       })
@@ -52,7 +50,7 @@ export class GoogleMap extends Component {
   }
 
   render() {
-    console.log(this.state.paidMarkers);
+    // console.log(this.state.paidMarkers);
     const { isLoaded, markers, paidmarkers } = this.state;
     if (!isLoaded) {
       return <div>Loading...</div>;
