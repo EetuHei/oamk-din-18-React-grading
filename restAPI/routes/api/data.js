@@ -11,4 +11,10 @@ router.get("/markers", (req, res) => {
   });
 });
 
+router.get("/paidmarkers", (req, res) => {
+  db.query("SELECT * FROM paidmarkers").then(results => {
+    res.json(results);
+  });
+});
+
 module.exports = router;
