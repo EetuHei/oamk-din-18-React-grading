@@ -55,6 +55,9 @@ Promise.all([
   db.query(`CREATE TABLE IF NOT EXISTS markers(
           id VARCHAR(32) PRIMARY KEY,
           name VARCHAR(32),
+          type VARCHAR(255),
+          kw VARCHAR(255),
+          icon VARCHAR(255),
           latitude VARCHAR(255),
           longitude VARCHAR(255),
           price VARCHAR(255)
@@ -62,6 +65,9 @@ Promise.all([
       db.query(`CREATE TABLE IF NOT EXISTS paidmarkers(
         id VARCHAR(32) PRIMARY KEY,
         name VARCHAR(32),
+        type VARCHAR(255),
+        kw VARCHAR(255),
+        icon VARCHAR(255),
         latitude VARCHAR(255),
         longitude VARCHAR(255),
         price VARCHAR(255)

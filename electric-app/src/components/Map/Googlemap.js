@@ -34,14 +34,6 @@ export class GoogleMap extends Component {
     }
   };
 
-  // componentDidMount() {
-  //   fetch("/data")
-  //     .then(r => r.json())
-  //     .then(data => {
-  //       this.setState({ markers: data.markers });
-  //     });
-  // }
-
   componentDidMount() {
     Promise.all([
       fetch("http://localhost:4000/api/markers"),
@@ -60,7 +52,6 @@ export class GoogleMap extends Component {
   }
 
   render() {
-    // this.state.items returns all data for markers in array -> accessing one requires this.state.items[x]
     console.log(this.state.paidMarkers);
     const { isLoaded, markers, paidmarkers } = this.state;
     if (!isLoaded) {
@@ -84,9 +75,8 @@ export class GoogleMap extends Component {
                 id={marker.id}
                 position={{ lat: marker.latitude, lng: marker.longitude }}
                 icon={{
-                  url:
-                    "https://cdn2.iconfinder.com/data/icons/bitsies/128/Lightning-128.png",
-                  scaledSize: new window.google.maps.Size(40, 40)
+                  url: marker.icon,
+                  scaledSize: new window.google.maps.Size(25, 40)
                 }}
               />
             ))}
@@ -97,9 +87,8 @@ export class GoogleMap extends Component {
                 id={marker.id}
                 position={{ lat: marker.latitude, lng: marker.longitude }}
                 icon={{
-                  url:
-                    "https://cdn2.iconfinder.com/data/icons/miscellaneous-41/47/Asset_10-128.png",
-                  scaledSize: new window.google.maps.Size(25, 40)
+                  url: marker.icon,
+                  scaledSize: new window.google.maps.Size(25, 25)
                 }}
               />
             ))}
