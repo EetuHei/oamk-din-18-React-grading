@@ -6,6 +6,7 @@ import { Redirect, Link } from "react-router-dom";
 import "./register.css";
 import api from "./register.json";
 
+
 export default class Register extends React.Component {
   constructor(props) {
     super(props);

@@ -36,7 +36,10 @@ export class GoogleMap extends Component {
   };
 
   componentDidMount() {
-    Promise.all([fetch(data.url1), fetch(data.url2)])
+    Promise.all([
+      fetch(data.url1),
+      fetch(data.url2)
+    ])
       .then(([res1, res2]) => {
         return Promise.all([res1.json(), res2.json()]);
       })

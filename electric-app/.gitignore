@@ -24,4 +24,4 @@ yarn-error.log*
 
 /src/components/Map/data.json
 /src/components/Map/api.json
-/src/components/Register/register.json
+register.json
