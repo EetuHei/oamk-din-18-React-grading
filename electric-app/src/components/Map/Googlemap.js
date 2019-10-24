@@ -36,8 +36,8 @@ export class GoogleMap extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch("http://localhost:4000/api/markers"),
-      fetch("http://localhost:4000/api/paidmarkers")
+      fetch(data.url1),
+      fetch(data.url2)
     ])
       .then(([res1, res2]) => {
         return Promise.all([res1.json(), res2.json()]);
