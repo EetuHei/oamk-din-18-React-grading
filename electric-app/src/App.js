@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import GoogleMap from "./components/Map/Googlemap";
-import Header from "./components/Header/Header";
 import Register from "./components/Register/Register";
 import Pricing from "./components/Pricing/Pricing";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,15 +11,10 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      searchField: "",
       userData: null,
       items: data.items
     };
   }
-
-  onSearchChange = event => {
-    this.setState({ searchField: event.target.value });
-  };
 
   storeUserData = (username, password, passwordConfirm) => {
     this.setState({
@@ -35,12 +29,13 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <Header />
         {/* <Route path="/" exact component={GoogleMap} /> */}
         <Route
           path="/"
           exact
-          render={routeProps => <GoogleMap userData={this.state.userData} />}
+          render={routeProps => (
+            <GoogleMap userData={this.state.userData} {...routeProps} />
+          )}
         />
         <Route
           path="/register"
