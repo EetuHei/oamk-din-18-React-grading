@@ -58,7 +58,14 @@ Promise.all([
           latitude VARCHAR(255),
           longitude VARCHAR(255),
           price VARCHAR(255)
-      )`)
+      )`),
+      db.query(`CREATE TABLE IF NOT EXISTS paidmarkers(
+        id VARCHAR(32) PRIMARY KEY,
+        name VARCHAR(32),
+        latitude VARCHAR(255),
+        longitude VARCHAR(255),
+        price VARCHAR(255)
+    )`)
   // Add more table create statements if you need more tables
 ])
   .then(() => {
