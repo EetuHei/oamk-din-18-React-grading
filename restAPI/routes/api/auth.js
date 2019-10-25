@@ -8,20 +8,20 @@ const db = require("../../config/database/database");
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/profile",
-    failureRedirect: "/failurelogin",
-    successMessage: "logged in Pog",
-    failureMessage: "failed to login pepehands"
+    failureRedirect: "/login",
+    successMessage: "Logged in!",
+    failureMessage: "Failed to login"
   })(req, res, next);
 });
 
 //GET /api/
-//get user by id only for testing
+//get profile page
 router.get(
-  "/users/:id",
+  "/profile",
   passport.authenticate("local", { session: false }),
   (req, res) => {
-    db.query("SELECT id, username FROM users WHERE id = ?", [
-      req.params.id
+    db.query("SELECT id, username FROM users WHERE username = ?", [
+      req.body.username
     ]).then(results => {
       res.json(results);
     });

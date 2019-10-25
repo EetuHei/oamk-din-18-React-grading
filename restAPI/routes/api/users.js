@@ -33,9 +33,7 @@ router.post("/signup", (req, res) => {
       }
       //if the username is found, tells the user that the username is taken
       if (results.length !== 0) {
-        console.log(results.length);
-        console.log("Username is already taken.");
-        res.sendStatus(400);
+        res.status(400).json({username: "Username is taken!"});
       } else {
         //if username is not taken, hashes password with bcrypt
         //and saves username and hashed password to database
@@ -52,7 +50,7 @@ router.post("/signup", (req, res) => {
               ])
               .then(dbResults => {
                 console.log(dbResults);
-                res.sendStatus(201);
+                res.sendStatus(200);
               })
               .catch(e => res.sendStatus(500))
           );
@@ -60,10 +58,7 @@ router.post("/signup", (req, res) => {
       }
     });
   } else {
-    console.log(
-      "Incorrect username or password. Username hast to be more than 3 characters long nad password more than 6 characters long"
-    );
-    res.sendStatus(400);
+    res.status(400).json({error: "Incorrect username or password. Username hast to be more than 3 characters long nad password more than 6 characters long"});
   }
 });
 
@@ -72,14 +67,6 @@ router.post("/signup", (req, res) => {
 router.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
-});
-
-//GET /api/
-//unprotected route
-router.get("/users", (req, res) => {
-  db.query("SELECT id, username FROM users").then(results => {
-    res.json(results);
-  });
 });
 
 module.exports = router;

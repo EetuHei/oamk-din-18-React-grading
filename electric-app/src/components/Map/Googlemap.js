@@ -88,6 +88,7 @@ export class GoogleMap extends Component {
                   name={marker.name}
                   id={marker.id}
                   price={marker.price}
+                  type={marker.type}
                   position={{ lat: marker.latitude, lng: marker.longitude }}
                   icon={{
                     url: marker.icon,
@@ -107,6 +108,7 @@ export class GoogleMap extends Component {
                   name={marker.name}
                   id={marker.id}
                   price={marker.price}
+                  type={marker.type}
                   position={{ lat: marker.latitude, lng: marker.longitude }}
                   icon={{
                     url: marker.icon,
@@ -122,6 +124,7 @@ export class GoogleMap extends Component {
               <div className="infoStyles">
                 <p>City: {this.state.selectedPlace.name}</p>
                 <p>ID: {this.state.selectedPlace.id}</p>
+                <p>Connector: {this.state.selectedPlace.type}</p>
                 <p>Price: {this.state.selectedPlace.price}</p>
               </div>
             </InfoWindow>
