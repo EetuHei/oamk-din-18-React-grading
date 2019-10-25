@@ -66,7 +66,10 @@ export class GoogleMap extends Component {
     } else {
       return (
         <div>
-          <Header handleInput={this.handleInput.bind(this)} />
+          <Header
+            handleInput={this.handleInput.bind(this)}
+            authenticated={this.props.authenticated}
+          />
           <Map
             google={this.props.google}
             zoom={6}

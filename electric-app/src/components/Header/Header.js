@@ -10,8 +10,8 @@ class Header extends React.Component {
       searchField: ""
     };
   }
-
   render() {
+    console.log(this.props.authenticated);
     return (
       <div>
         <Navbar bg="dark" variant="dark">
@@ -38,12 +38,20 @@ class Header extends React.Component {
             </Container>
           </div>
           <Nav>
-            <Link to="/Register">
-              <Button className="btn btn-dark">Sign Up</Button>
-            </Link>
-            <Link to="/Pricing">
-              <Button className="btn btn-dark">Login</Button>
-            </Link>
+            {this.props.authenticated === true ? (
+              <Link to="/Logout">
+                <Button className="btn btn-dark">Logout</Button>
+              </Link>
+            ) : (
+              <div>
+                <Link to="/Register">
+                  <Button className="btn btn-dark">Sign Up</Button>
+                </Link>
+                <Link to="/Login">
+                  <Button className="btn btn-dark">Login</Button>
+                </Link>
+              </div>
+            )}
           </Nav>
         </Navbar>
       </div>

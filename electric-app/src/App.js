@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import GoogleMap from "./components/Map/Googlemap";
 import Register from "./components/Register/Register";
 import Pricing from "./components/Pricing/Pricing";
+import Login from "./components/Login/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import data from "./components/Map/data.json";
 
@@ -12,7 +13,8 @@ export default class App extends React.Component {
 
     this.state = {
       userData: null,
-      items: data.items
+      items: data.items,
+      authenticated: false
     };
   }
 
@@ -26,6 +28,12 @@ export default class App extends React.Component {
     });
   };
 
+  handleLogin = event => {
+    this.setState({
+      authenticated: true
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -34,7 +42,10 @@ export default class App extends React.Component {
           path="/"
           exact
           render={routeProps => (
-            <GoogleMap userData={this.state.userData} {...routeProps} />
+            <GoogleMap
+              authenticated={this.state.authenticated}
+              {...routeProps}
+            />
           )}
         />
         <Route
@@ -45,6 +56,11 @@ export default class App extends React.Component {
           )}
         />
         <Route path="/pricing" exact render component={Pricing} />
+        <Route
+          exact
+          path="/login"
+          render={() => <Login handleLogin={() => this.handleLogin()} />}
+        />
       </Router>
     );
   }
