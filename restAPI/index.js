@@ -50,7 +50,8 @@ Promise.all([
   db.query(`CREATE TABLE IF NOT EXISTS users(
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(32) UNIQUE,
-            password VARCHAR(255)
+            password VARCHAR(255),
+            history VARCHAR(255)
         )`),
   db.query(`CREATE TABLE IF NOT EXISTS markers(
           id VARCHAR(32) PRIMARY KEY,
@@ -60,7 +61,8 @@ Promise.all([
           icon VARCHAR(255),
           latitude VARCHAR(255),
           longitude VARCHAR(255),
-          price VARCHAR(255)
+          price VARCHAR(255),
+          inuse BOOLEAN
       )`),
       db.query(`CREATE TABLE IF NOT EXISTS paidmarkers(
         id VARCHAR(32) PRIMARY KEY,
@@ -70,7 +72,8 @@ Promise.all([
         icon VARCHAR(255),
         latitude VARCHAR(255),
         longitude VARCHAR(255),
-        price VARCHAR(255)
+        price VARCHAR(255),
+        inuse BOOLEAN
     )`)
   // Add more table create statements if you need more tables
 ])
