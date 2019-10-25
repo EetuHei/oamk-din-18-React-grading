@@ -3,83 +3,64 @@ import { Button } from "react-bootstrap";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import GoogleMap from "..//Map/Googlemap";
 import { Redirect, Link } from "react-router-dom";
-import "./register.css";
-import api from "./register.json";
+import "./login.css";
+import api from "../Register/register.json";
 
-export default class Register extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      passwordConfirm: ""
+      redirect: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleValidation() {
-    let formIsValid = true;
-
-    if (!/^[a-zA-Z]+$/.test(this.state.username)) {
-      formIsValid = false;
-      alert("Your username can contain only letters");
-    }
-
-    if (this.state.password !== this.state.passwordConfirm) {
-      formIsValid = false;
-      alert("Your passwords don't match");
-    }
-
-    if (this.state.password.length < 6) {
-      formIsValid = false;
-      alert("Your password must contain atleast 6 characters");
-    }
-
-    return formIsValid;
-  }
-
   handleSubmit(event) {
     let userData = {
       username: this.state.username,
-      password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      password: this.state.password
     };
-    // console.log(userData, "this is userData");
-
-    if (this.handleValidation()) {
-      const url = api.url;
-
-      fetch(url, {
-        body: JSON.stringify(userData),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
+    const url = api.url2;
+    fetch(url, {
+      body: JSON.stringify(userData),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(myJSON => {
+        console.log(myJSON);
+        if (myJSON.success) {
+          this.props.handleLogin();
+          this.setState({ redirect: true });
+        } else {
+          alert("Login failed!");
         }
       })
-        .then(response => response.json())
-        .then(myJSON => {
-          console.log(myJSON);
-        })
-        .catch(err => console.log(err));
-
-      this.setState({ redirect: true });
-    } else {
-      console.log("Form has errors!");
-    }
+      .catch(err => console.log(err));
   }
 
   render() {
     const redirect = this.state.redirect;
     if (redirect) {
-      return <Redirect to="/" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/"
+          }}
+        />
+      );
     }
     return (
       <div>
         <GoogleMap />
         <Modal isOpen={true} className="modalColor">
-          <ModalHeader className="modalColor">Sign Up</ModalHeader>
+          <ModalHeader className="modalColor">Login</ModalHeader>
           <ModalBody className="modalColor">
             <form>
               <div>Name</div>
@@ -99,15 +80,6 @@ export default class Register extends React.Component {
                   this.setState({ password: event.target.value })
                 }
               />
-
-              <div>Confirm Password</div>
-              <input
-                type="password"
-                name="passwordConfirm"
-                onChange={event =>
-                  this.setState({ passwordConfirm: event.target.value })
-                }
-              />
             </form>
           </ModalBody>
           <ModalFooter className="modalColor">
@@ -116,7 +88,7 @@ export default class Register extends React.Component {
               type="submit"
               onClick={event => this.handleSubmit(event)}
             >
-              Sign Up
+              Login
             </Button>
             <Link to="/">
               <Button className="btn btn-dark">Cancel</Button>
@@ -127,3 +99,5 @@ export default class Register extends React.Component {
     );
   }
 }
+
+export default Login;
