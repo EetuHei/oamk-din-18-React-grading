@@ -39,9 +39,14 @@ class Header extends React.Component {
           </div>
           <Nav>
             {this.props.authenticated === true ? (
-              <Link to="/Logout">
-                <Button className="btn btn-dark">Logout</Button>
-              </Link>
+              <div>
+                <Link to="/">
+                  <Button className="btn btn-dark">Profile</Button>
+                </Link>
+                <Link to="/">
+                  <Button className="btn btn-dark">Logout</Button>
+                </Link>
+              </div>
             ) : (
               <div>
                 <Link to="/Register">
